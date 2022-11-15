@@ -24,29 +24,23 @@ const AdminPage = () => {
 
             axios.post("https://api.cloudinary.com/v1_1/dvgvxr1uh/image/upload", data).then(
                 (res) => {
-                    console.log(res.data.url)
                     setImageLink(res.data.url)
-                    console.log("Done")
                 }
-                ).then(
-                    () => {
-                        console.log("1stDone")
-                        const item = {
-                            "title": title,
-                            "amount": amount,
-                            "imageLink": imageLink
+            ).then(
+                () => {
+                    console.log(imageLink.toString())
+                    const item = {
+                        "title": title,
+                        "amount": amount,
+                        "imageLink": imageLink
+                    }
+                    axios.post("https://canteen-server.onrender.com/api/canteen/add", item).then(
+                        (res) => console.log(res)
+                    ).catch(
+                        (err) => {
+                            console.log(err.response.data)
                         }
-                        console.log("2ndDone")
-                        if (imageLink !== "") {
-                            
-                            axios.post("https://canteen-server.onrender.com/api/canteen/add", item).then(
-                                (res) => console.log(res)
-                            ).catch(
-                                (err) => {
-                                    console.log(err.response.data)
-                                }
-                            )
-                        }
+                    )
                 }
             ).catch(
                 (err) => {
