@@ -34,7 +34,7 @@ const AdminPage = () => {
                         "amount": amount,
                         "imageLink": res.data.url
                     }
-                    axios.post("https://canteen-server.onrender.com/api/canteen/add", item).then(
+                    axios.post("https://localhost:5000/api/canteen/add", item).then(
                         (res) => console.log(res)
                     ).catch(
                         (err) => {

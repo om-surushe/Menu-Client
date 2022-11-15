@@ -7,7 +7,7 @@ const Menu = () => {
     const [backendData, setBackendData] = useState([{}])
     
     useEffect(() => {
-        axios.get("https://canteen-server.onrender.com/api/canteen/menu").then((res) => setBackendData(res.data))
+        axios.get("http://localhost:5000/api/canteen/menu").then((res) => setBackendData(res.data))
     },[])
 
     return (
