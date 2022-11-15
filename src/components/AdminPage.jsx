@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const AdminPage = () => {
 
-    const [image, setImage] = useState("")
+    const [image, setImage] = useState()
     const [imageLink, setImageLink] = useState("")
     const [title, setTitle] = useState("")
     const [amount, setAmount] = useState("")
@@ -22,17 +22,17 @@ const AdminPage = () => {
             data.append("upload_preset", "menuapp")
             data.append("cloud_name", "dvgvxr1uh")
 
+            
+
             axios.post("https://api.cloudinary.com/v1_1/dvgvxr1uh/image/upload", data).then(
                 (res) => {
+                    console.log(res)
                     setImageLink(res.data.url)
-                }
-            ).then(
-                () => {
-                    console.log(imageLink.toString())
-                    const item = {
+                    console.log(imageLink)
+                    var item = {
                         "title": title,
                         "amount": amount,
-                        "imageLink": imageLink
+                        "imageLink": res.data.url
                     }
                     axios.post("https://canteen-server.onrender.com/api/canteen/add", item).then(
                         (res) => console.log(res)
@@ -50,7 +50,7 @@ const AdminPage = () => {
 
 
         } catch (error) {
-            console.log(error.response.data)
+            console.log(error)
         }
     }
 
